@@ -16,7 +16,6 @@
 		75D32BA31E851C1E00445D09 /* OnboardingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D32B981E851C1E00445D09 /* OnboardingScreenViewController.swift */; };
 		75D32BA41E851C1E00445D09 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D32B991E851C1E00445D09 /* OnboardingViewController.swift */; };
 		75D32BA51E851C1E00445D09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D32B9B1E851C1E00445D09 /* AppDelegate.swift */; };
-		75D32BA61E851C1E00445D09 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75D32B9C1E851C1E00445D09 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +140,7 @@
 				TargetAttributes = {
 					75D32B691E85117900445D09 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -168,7 +168,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75D32BA61E851C1E00445D09 /* Info.plist in Resources */,
 				75D32BA01E851C1E00445D09 /* Main.storyboard in Resources */,
 				75D32B9E1E851C1E00445D09 /* Assets.xcassets in Resources */,
 				75D32B9F1E851C1E00445D09 /* LaunchScreen.storyboard in Resources */,
@@ -312,7 +311,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.OnboardingPageViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -324,7 +323,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.OnboardingPageViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

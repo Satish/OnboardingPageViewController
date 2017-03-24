@@ -9,11 +9,11 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-    @IBOutlet weak private var nextButton: UIButton!
-    @IBOutlet weak private var containerView: UIView!
-    @IBOutlet weak private var pageControl: UIPageControl! {
+    @IBOutlet weak fileprivate var nextButton: UIButton!
+    @IBOutlet weak fileprivate var containerView: UIView!
+    @IBOutlet weak fileprivate var pageControl: UIPageControl! {
         didSet {
-            pageControl.addTarget(self, action: #selector(OnboardingViewController.didChangePageControlValue), forControlEvents: .ValueChanged)
+            pageControl.addTarget(self, action: #selector(OnboardingViewController.didChangePageControlValue), for: .valueChanged)
         }
     }
 
@@ -23,18 +23,18 @@ class OnboardingViewController: UIViewController {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let pageViewController = segue.destinationViewController as? OnboardingPageViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let pageViewController = segue.destination as? OnboardingPageViewController {
             onboardingPageViewController = pageViewController
         }
     }
 
-    @IBAction private func nextButtonTapped(sender: UIButton) {
+    @IBAction fileprivate func nextButtonTapped(_ sender: UIButton) {
         if pageControl.currentPage+1 >= pageControl.numberOfPages {
             updateRootViewController()
         } else {
-            nextButton.hidden = false
-            pageControl.hidden = false
+            nextButton.isHidden = false
+            pageControl.isHidden = false
             onboardingPageViewController?.scrollToNextViewController()
         }
     }
@@ -44,8 +44,8 @@ class OnboardingViewController: UIViewController {
     }
 
     func updateRootViewController() {
-        nextButton.hidden = true
-        pageControl.hidden = true
+        nextButton.isHidden = true
+        pageControl.isHidden = true
         //view.window?.rootViewController = UIStoryboard.landingViewController()
     }
     
@@ -53,18 +53,18 @@ class OnboardingViewController: UIViewController {
 
 extension OnboardingViewController: OnboardingPageViewControllerDelegate {
     
-    func onboarding(pageViewController: OnboardingPageViewController, didUpdatePageCount count: Int) {
+    func onboarding(_ pageViewController: OnboardingPageViewController, didUpdatePageCount count: Int) {
         pageControl.numberOfPages = count
     }
     
-    func onboarding(pageViewController: OnboardingPageViewController, didUpdatePageIndex index: Int) {
+    func onboarding(_ pageViewController: OnboardingPageViewController, didUpdatePageIndex index: Int) {
         pageControl.currentPage = index
         
         if index+1 >= pageControl.numberOfPages {
             updateRootViewController()
         } else {
-            nextButton.hidden = false
-            pageControl.hidden = false
+            nextButton.isHidden = false
+            pageControl.isHidden = false
         }
     }
     

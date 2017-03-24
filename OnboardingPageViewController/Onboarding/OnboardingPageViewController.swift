@@ -9,8 +9,8 @@
 import UIKit
 
 protocol OnboardingPageViewControllerDelegate: class {
-    func onboarding(pageViewController: OnboardingPageViewController, didUpdatePageCount count: Int)
-    func onboarding(pageViewController: OnboardingPageViewController, didUpdatePageIndex index: Int)
+    func onboarding(_ pageViewController: OnboardingPageViewController, didUpdatePageCount count: Int)
+    func onboarding(_ pageViewController: OnboardingPageViewController, didUpdatePageIndex index: Int)
 }
 
 class OnboardingPageViewController: UIPageViewController {
@@ -25,10 +25,10 @@ class OnboardingPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
 
-        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.grayColor(), message: "Screen 1"))
-        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.brownColor(), message: "Screen 2"))
-        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.darkGrayColor(), message: "Screen 3"))
-        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.lightGrayColor(), message: "Screen 4"))
+        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.gray, message: "Screen 1"))
+        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.brown, message: "Screen 2"))
+        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.darkGray, message: "Screen 3"))
+        onboardingViewControllers.append(screenViewController(backgroundColor: UIColor.lightGray, message: "Screen 4"))
         onboardingViewControllers.append(UIStoryboard.landingViewController())
 
         onboardingDelegate?.onboarding(self, didUpdatePageCount: onboardingViewControllers.count)
@@ -39,27 +39,27 @@ class OnboardingPageViewController: UIPageViewController {
 
     func scrollToNextViewController() {
         if let visibleViewController = viewControllers?.first,
-            let nextViewController = pageViewController(self, viewControllerAfterViewController: visibleViewController) {
+            let nextViewController = pageViewController(self, viewControllerAfter: visibleViewController) {
             scrollToViewController(nextViewController)
         }
     }
 
-    func scrollToViewController(index index: Int) {
+    func scrollToViewController(index: Int) {
         if let firstViewController = viewControllers?.first,
-            let currentIndex = onboardingViewControllers.indexOf(firstViewController) {
-            let direction: UIPageViewControllerNavigationDirection = index >= currentIndex ? .Forward : .Reverse
+            let currentIndex = onboardingViewControllers.index(of: firstViewController) {
+            let direction: UIPageViewControllerNavigationDirection = index >= currentIndex ? .forward : .reverse
             let nextViewController = onboardingViewControllers[index]
             scrollToViewController(nextViewController, direction: direction)
         }
     }
 
-    private func scrollToViewController(viewController: UIViewController, direction: UIPageViewControllerNavigationDirection = .Forward) {
+    fileprivate func scrollToViewController(_ viewController: UIViewController, direction: UIPageViewControllerNavigationDirection = .forward) {
         setViewControllers([viewController], direction: direction, animated: true, completion: { (finished) -> Void in
             self.pageViewControllerDidFinishAnimating()
         })
     }
 
-    private func screenViewController(backgroundColor backgroundColor: UIColor, message: String) -> UIViewController {
+    fileprivate func screenViewController(backgroundColor: UIColor, message: String) -> UIViewController {
         let screenVC = UIStoryboard.onboardingViewController()
         screenVC.message = message
         screenVC.view.backgroundColor = backgroundColor
@@ -71,13 +71,13 @@ class OnboardingPageViewController: UIPageViewController {
 
 extension OnboardingPageViewController: UIPageViewControllerDelegate {
 
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         pageViewControllerDidFinishAnimating()
     }
 
-    private func pageViewControllerDidFinishAnimating() {
+    fileprivate func pageViewControllerDidFinishAnimating() {
         if let firstViewController = viewControllers?.first,
-            let index = onboardingViewControllers.indexOf(firstViewController) {
+            let index = onboardingViewControllers.index(of: firstViewController) {
             onboardingDelegate?.onboarding(self, didUpdatePageIndex: index)
         }
     }
@@ -86,8 +86,8 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
 
 extension OnboardingPageViewController: UIPageViewControllerDataSource {
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        guard let index = onboardingViewControllers.indexOf(viewController) else {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let index = onboardingViewControllers.index(of: viewController) else {
             return nil
         }
 
@@ -103,8 +103,8 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         return onboardingViewControllers[previousIndex]
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        guard let index = onboardingViewControllers.indexOf(viewController) else {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let index = onboardingViewControllers.index(of: viewController) else {
             return nil
         }
 

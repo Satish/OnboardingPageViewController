@@ -11,27 +11,27 @@ import UIKit
 extension UIStoryboard {
     
     // Storyboards Instance
-    static var mainStoryboard: UIStoryboard { return UIStoryboard(name: Constants.MainStoryboardName, bundle: NSBundle.mainBundle()) }
+    static var mainStoryboard: UIStoryboard { return UIStoryboard(name: Constants.MainStoryboardName, bundle: Bundle.main) }
 
 
     // VCs
     static func onboardingViewController() -> OnboardingScreenViewController {
-        return mainStoryboard.instantiateViewControllerWithIdentifier(StoryboardID.OnboardingScreenViewController) as! OnboardingScreenViewController
+        return mainStoryboard.instantiateViewController(withIdentifier: StoryboardID.OnboardingScreenViewController) as! OnboardingScreenViewController
     }
 
     static func landingViewController() -> LandingViewController {
-        return mainStoryboard.instantiateViewControllerWithIdentifier(StoryboardID.LandingViewController) as! LandingViewController
+        return mainStoryboard.instantiateViewController(withIdentifier: StoryboardID.LandingViewController) as! LandingViewController
     }
 
 }
 
 extension UIStoryboard {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let MainStoryboardName = "Main"
     }
 
-    private struct StoryboardID {
+    fileprivate struct StoryboardID {
         static let OnboardingScreenViewController = "OnboardingScreenViewControllerSBID"
         static let LandingViewController          = "LandingViewControllerSBID"
     }

@@ -10,8 +10,8 @@ import UIKit
 
 class OnboardingScreenViewController: UIViewController {
 
-    @IBOutlet private weak var messageLabel: UILabel!
-    @IBOutlet private weak var bgImageView: UIImageView!
+    @IBOutlet fileprivate weak var messageLabel: UILabel!
+    @IBOutlet fileprivate weak var bgImageView: UIImageView!
 
     var message: String?
     var bgImageName: String?
@@ -22,7 +22,7 @@ class OnboardingScreenViewController: UIViewController {
         updateUI()
     }
 
-    private func updateUI() {
+    fileprivate func updateUI() {
         messageLabel.text = message
 
         if let imageName = bgImageName {
